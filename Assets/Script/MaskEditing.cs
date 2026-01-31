@@ -11,7 +11,8 @@ public class MaskEditing : MonoBehaviour
     private Vector3 mousePos;
     private bool isDragged;
 
-    public Transform parentMask;
+    //public Transform parentMask;
+    public GameObject parentMask;
     public SpriteRenderer maskWhite;
 
  
@@ -69,16 +70,11 @@ public class MaskEditing : MonoBehaviour
             button = hit.collider.GetComponentInParent<ButtonSprite>();
             
         }
-        if (button == null)
-        {
-            Debug.Log("Hit something, but it's not a sticker button");
-            return;
-        }
-
+       
 
         Debug.Log("Hit: " + hit.collider.name);
-
-        instanceSticker = Instantiate(button.stickerPrefab, mouseWorld, Quaternion.identity, parentMask);
+        instanceSticker = Instantiate(button.stickerPrefab, mouseWorld, Quaternion.identity, parentMask.transform);
+        //instanceSticker.transform.parent = parentMask.transform;
         isDragged = true;
     }
 
