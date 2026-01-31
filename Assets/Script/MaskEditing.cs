@@ -7,7 +7,6 @@ using static UnityEditor.PlayerSettings;
 public class MaskEditing : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public GameObject prefSticker;
     private GameObject instanceSticker;
     private Vector3 mousePos;
     private bool isDragged;
@@ -62,12 +61,24 @@ public class MaskEditing : MonoBehaviour
         if (hit.collider == null)
         {
             Debug.Log("No hit");
+
+            return;
+        }
+        ButtonSprite button = hit.collider.GetComponent<ButtonSprite>();
+        if (button == null) {
+            button = hit.collider.GetComponentInParent<ButtonSprite>();
+            
+        }
+        if (button == null)
+        {
+            Debug.Log("Hit something, but it's not a sticker button");
             return;
         }
 
+
         Debug.Log("Hit: " + hit.collider.name);
 
-        instanceSticker = Instantiate(prefSticker, mouseWorld, Quaternion.identity);
+        instanceSticker = Instantiate(button.stickerPrefab, mouseWorld, Quaternion.identity, parentMask);
         isDragged = true;
     }
 
