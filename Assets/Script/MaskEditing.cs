@@ -20,9 +20,13 @@ public class MaskEditing : MonoBehaviour
     public SpriteRenderer maskWhite;
 
 
+    //UI elements
     public GameObject rotateRight;
     public GameObject rotateLeft;
- 
+    public GameObject mirror;
+    public GameObject undo;
+
+
     // Update is called once per frame
     void Update()
     {
@@ -41,13 +45,20 @@ public class MaskEditing : MonoBehaviour
 
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
-            isDragged = false;
-            if (!CheckMaskBounds()) {
-                Destroy(instanceSticker); // Delete a stucker if its out of mask bounds. We are staying clean overhere.
-            }
-            else
+            if (isDragged && instanceSticker != null)
             {
-                RegisterUndo(instanceSticker);
+                isDragged = false;
+
+                if (!CheckMaskBounds())
+                {
+                    Destroy(instanceSticker);
+                }
+                else
+                {
+                    RegisterUndo(instanceSticker);
+                }
+
+                instanceSticker = null; // clear the reference
             }
 
         }
@@ -79,8 +90,8 @@ public class MaskEditing : MonoBehaviour
             return;
         }
 
-        UndoButton undo = hit.collider.GetComponentInParent<UndoButton>();
-        if (undo != null)
+ 
+        if (hit.collider.gameObject == undo)
         {
             Undo();
             return;
@@ -95,22 +106,19 @@ public class MaskEditing : MonoBehaviour
 
 
         if (hit.collider.gameObject == rotateRight) {
-            if (undoStack.Count > 0) {
-                GameObject lastSticker = undoStack.Peek(); // get last placed sticker
-                lastSticker.transform.Rotate(0f, 0f, 10f); // rotate 10 degrees clockwise around Z
-            }
+            RotateLastSticker(10.0f);
+                return;
         }
         if (hit.collider.gameObject == rotateLeft) {
-            if (undoStack.Count > 0)
-            {
-                GameObject lastSticker = undoStack.Peek(); // get last placed sticker
-                lastSticker.transform.Rotate(0f, 0f, -10f); // rotate 10 degrees clockwise around Z
-            }
+            RotateLastSticker(-10.0f);
+            return;
         }
-    
-       
+        if (hit.collider.gameObject == mirror)
+        {
+            Mirror();
+            return;
+        }
 
-       // Debug.Log("Hit: " + hit.collider.name);
         instanceSticker = Instantiate(button.stickerPrefab, mouseWorld, Quaternion.identity, parentMask.transform);
         isDragged = true;
     }
@@ -125,11 +133,13 @@ public class MaskEditing : MonoBehaviour
         return maskBounds.Contains(stickerPos);
     }
 
-    void RegisterUndo(GameObject stickersTransform) {
+    void RegisterUndo(GameObject stickersTransform)
+    {
         undoStack.Push(stickersTransform);
+        Debug.Log("Undo works?: " + undoStack.Count);
 
         // Limit undo stack size
-        while (undoStack.Count > maxUndoSteps)
+        while (undoStack.Count > 10)
         {
             // Remove the oldest entry
             GameObject[] temp = undoStack.ToArray();
@@ -138,15 +148,24 @@ public class MaskEditing : MonoBehaviour
             for (int i = Mathf.Min(temp.Length - 1, maxUndoSteps - 1); i >= 0; i--)
                 undoStack.Push(temp[i]);
         }
-        Debug.Log("Undo works?: " + undoStack.Count);
     }
 
-    public void Undo()
+    void Undo()
     {
         if (undoStack.Count == 0) return;
 
         GameObject last = undoStack.Pop();
         Destroy(last);
+    }
+
+    void RotateLastSticker(float angle) { 
+         if (undoStack.Count == 0) return;
+        undoStack.Peek().transform.Rotate(0f, 0f, angle);
+    }
+
+    void Mirror()
+    {
+      
     }
 
 }
