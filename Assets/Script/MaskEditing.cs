@@ -26,7 +26,7 @@ public class MaskEditing : MonoBehaviour
     public GameObject rotateLeft;
     public GameObject mirror;
     public GameObject undo;
-
+    public GameObject save;
 
     // Update is called once per frame
     void Update()
@@ -119,8 +119,16 @@ public class MaskEditing : MonoBehaviour
         }
         if (hit.collider.gameObject == mirror)
         {
-          
+            //Doesnt work  
             Mirror();
+            return;
+        }
+        //TODO:: ROTATE AND SCALE
+
+        if (hit.collider.gameObject == save)
+        {
+            MaskSave maskSave = save.GetComponent<MaskSave>();
+            maskSave.SaveComposedTexture();
             return;
         }
 
