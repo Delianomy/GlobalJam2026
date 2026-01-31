@@ -19,6 +19,9 @@ public class MaskEditing : MonoBehaviour
     public GameObject parentMask;
     public SpriteRenderer maskWhite;
 
+
+    public GameObject rotateRight;
+    public GameObject rotateLeft;
  
     // Update is called once per frame
     void Update()
@@ -89,6 +92,22 @@ public class MaskEditing : MonoBehaviour
             button = hit.collider.GetComponentInParent<ButtonSprite>();
             
         }
+
+
+        if (hit.collider.gameObject == rotateRight) {
+            if (undoStack.Count > 0) {
+                GameObject lastSticker = undoStack.Peek(); // get last placed sticker
+                lastSticker.transform.Rotate(0f, 0f, 10f); // rotate 10 degrees clockwise around Z
+            }
+        }
+        if (hit.collider.gameObject == rotateLeft) {
+            if (undoStack.Count > 0)
+            {
+                GameObject lastSticker = undoStack.Peek(); // get last placed sticker
+                lastSticker.transform.Rotate(0f, 0f, -10f); // rotate 10 degrees clockwise around Z
+            }
+        }
+    
        
 
        // Debug.Log("Hit: " + hit.collider.name);
