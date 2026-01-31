@@ -128,7 +128,7 @@ public class MaskEditing : MonoBehaviour
         if (hit.collider.gameObject == save)
         {
             MaskSave maskSave = save.GetComponent<MaskSave>();
-            maskSave.SaveComposedTexture();
+            maskSave.SaveRuntimeTexture();
             return;
         }
 

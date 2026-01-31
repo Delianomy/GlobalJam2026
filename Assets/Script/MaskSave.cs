@@ -4,8 +4,47 @@ public class MaskSave : MonoBehaviour
 {
     public SpriteRenderer parentMask;
     public SpriteRenderer[] stickerChildren;
+    private string savedTexturePath;
+    public void SaveRuntimeTexture(string fileName = "ComposedTexture")
+    {
+        // Save to persistent data path (not in Assets folder)
+        string path = Path.Combine(Application.persistentDataPath, $"{fileName}.png");
 
-    public void SaveComposedTexture(string fileName = "NewMask")
+        // Your texture creation code here...
+        Texture2D texture = CreateComposedTexture();
+
+        byte[] bytes = texture.EncodeToPNG();
+        File.WriteAllBytes(path, bytes);
+
+        savedTexturePath = path;
+        Debug.Log($"Runtime texture saved to: {path}");
+        Destroy(texture);
+    }
+
+    public Texture2D LoadRuntimeTexture()
+    {
+        if (string.IsNullOrEmpty(savedTexturePath) || !File.Exists(savedTexturePath))
+        {
+            Debug.LogWarning("No saved texture found!");
+            return null;
+        }
+
+        byte[] bytes = File.ReadAllBytes(savedTexturePath);
+        Texture2D texture = new Texture2D(2, 2);
+        texture.LoadImage(bytes);
+        return texture;
+    }
+
+    // Clean up when done
+    public void DeleteRuntimeTexture()
+    {
+        if (!string.IsNullOrEmpty(savedTexturePath) && File.Exists(savedTexturePath))
+        {
+            File.Delete(savedTexturePath);
+            Debug.Log("Runtime texture deleted");
+        }
+    }
+    public Texture2D CreateComposedTexture()
     {
         // Get bounds to determine render texture size
         Bounds bounds = CalculateBounds();
@@ -36,21 +75,8 @@ public class MaskSave : MonoBehaviour
         RenderTexture.active = null;
         DestroyImmediate(renderCamera.gameObject);
         renderTexture.Release();
-
-        // Save as PNG asset
-        byte[] bytes = texture.EncodeToPNG();
-        string path = $"Assets/GeneratedTextures/{fileName}.png";
-
-        // Create directory if it doesn't exist
-        Directory.CreateDirectory("Assets/GeneratedTextures");
-
-        File.WriteAllBytes(path, bytes);
-
-#if UNITY_EDITOR
-        UnityEditor.AssetDatabase.Refresh();
-#endif
-
-        Debug.Log($"Texture saved to: {path}");
+        Debug.Log($"Created texture");
+        return texture;
     }
 
     private Bounds CalculateBounds()
@@ -64,5 +90,16 @@ public class MaskSave : MonoBehaviour
 
         return bounds;
     }
+
+    void OnApplicationQuit()
+    {
+        if (!string.IsNullOrEmpty(savedTexturePath) && File.Exists(savedTexturePath))
+        {
+            File.Delete(savedTexturePath);
+            Debug.Log("Runtime texture deleted");
+            savedTexturePath = null;
+        }
+    }
+
 }
 
