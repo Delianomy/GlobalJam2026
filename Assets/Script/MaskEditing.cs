@@ -1,9 +1,10 @@
 using System;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
-using System.Collections.Generic;
 
 public class MaskEditing : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class MaskEditing : MonoBehaviour
 
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
+            Debug.Log("Test");
             TrySpawnSticker();
         }
 
@@ -85,14 +87,14 @@ public class MaskEditing : MonoBehaviour
 
         if (hit.collider == null)
         {
-           // Debug.Log("No hit");
-
+            Debug.Log("No hit");
             return;
         }
 
  
         if (hit.collider.gameObject == undo)
         {
+            Debug.Log("Clicked Undo");
             Undo();
             return;
         }
@@ -101,20 +103,23 @@ public class MaskEditing : MonoBehaviour
         ButtonSprite button = hit.collider.GetComponent<ButtonSprite>();
         if (button == null) {
             button = hit.collider.GetComponentInParent<ButtonSprite>();
-            
+            Debug.Log("Clicked Create Prefab");
         }
 
 
         if (hit.collider.gameObject == rotateRight) {
+            Debug.Log("Clicked Rotate RIGHT");
             RotateLastSticker(10.0f);
                 return;
         }
         if (hit.collider.gameObject == rotateLeft) {
+            Debug.Log("Clicked Rotate LEFT");
             RotateLastSticker(-10.0f);
             return;
         }
         if (hit.collider.gameObject == mirror)
         {
+          
             Mirror();
             return;
         }
@@ -165,7 +170,8 @@ public class MaskEditing : MonoBehaviour
 
     void Mirror()
     {
-      
+        Debug.Log("Clicked Mirror");
+        undoStack.Peek().GetComponent<SpriteRenderer>().flipY = !undoStack.Peek().GetComponent<SpriteRenderer>().flipY;
     }
 
 }
