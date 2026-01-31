@@ -3,15 +3,19 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEditor.PlayerSettings;
+using System.Collections.Generic;
 
 public class MaskEditing : MonoBehaviour
 {
+    //Undo functionality
+    private Stack<GameObject> undoStack = new Stack<GameObject>();
+    public int maxUndoSteps = 3;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     private GameObject instanceSticker;
     private Vector3 mousePos;
     private bool isDragged;
 
-    //public Transform parentMask;
     public GameObject parentMask;
     public SpriteRenderer maskWhite;
 
@@ -36,9 +40,13 @@ public class MaskEditing : MonoBehaviour
         {
             isDragged = false;
             if (!CheckMaskBounds()) {
-                Destroy(instanceSticker);
+                Destroy(instanceSticker); // Delete a stucker if its out of mask bounds. We are staying clean overhere.
             }
-       
+            else
+            {
+                RegisterUndo(instanceSticker);
+            }
+
         }
     }
 
@@ -54,6 +62,8 @@ public class MaskEditing : MonoBehaviour
 
     void TrySpawnSticker()
     {
+        //Click on an Icon and try get a prefab
+        //Icons are not UI Buttons, just Sprites with Colliders I raycast upon.
         Vector2 mouseWorld =
              Camera.main.ScreenToWorldPoint(Mouse.current.position.ReadValue());
 
@@ -61,10 +71,19 @@ public class MaskEditing : MonoBehaviour
 
         if (hit.collider == null)
         {
-            Debug.Log("No hit");
+           // Debug.Log("No hit");
 
             return;
         }
+
+        UndoButton undo = hit.collider.GetComponentInParent<UndoButton>();
+        if (undo != null)
+        {
+            Undo();
+            return;
+        }
+
+
         ButtonSprite button = hit.collider.GetComponent<ButtonSprite>();
         if (button == null) {
             button = hit.collider.GetComponentInParent<ButtonSprite>();
@@ -72,20 +91,44 @@ public class MaskEditing : MonoBehaviour
         }
        
 
-        Debug.Log("Hit: " + hit.collider.name);
+       // Debug.Log("Hit: " + hit.collider.name);
         instanceSticker = Instantiate(button.stickerPrefab, mouseWorld, Quaternion.identity, parentMask.transform);
-        //instanceSticker.transform.parent = parentMask.transform;
         isDragged = true;
     }
 
     bool CheckMaskBounds() {
+
+        //This check will be used to prevent unneeded stacking of the invisible decorations outside of the mask
         Bounds maskBounds = maskWhite.bounds;
+        if (instanceSticker == null){ return false; }
         Vector3 stickerPos = instanceSticker.transform.position;
 
         return maskBounds.Contains(stickerPos);
     }
 
+    void RegisterUndo(GameObject stickersTransform) {
+        undoStack.Push(stickersTransform);
 
+        // Limit undo stack size
+        while (undoStack.Count > maxUndoSteps)
+        {
+            // Remove the oldest entry
+            GameObject[] temp = undoStack.ToArray();
+            undoStack.Clear();
+
+            for (int i = Mathf.Min(temp.Length - 1, maxUndoSteps - 1); i >= 0; i--)
+                undoStack.Push(temp[i]);
+        }
+        Debug.Log("Undo works?: " + undoStack.Count);
+    }
+
+    public void Undo()
+    {
+        if (undoStack.Count == 0) return;
+
+        GameObject last = undoStack.Pop();
+        Destroy(last);
+    }
 
 }
 
