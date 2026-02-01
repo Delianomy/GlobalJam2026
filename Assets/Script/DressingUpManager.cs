@@ -8,7 +8,7 @@ using static UnityEditor.Progress;
 public class DressingUpManager : MonoBehaviour
 {
 
-    [SerializeField] private Transform snapPoint;
+    [SerializeField] private GameObject snapPoint;
     private GameObject instanceOutfitPiece;
 
     private GameObject currentHair;
@@ -148,22 +148,23 @@ public class DressingUpManager : MonoBehaviour
     {
 
         Debug.Log(type);
+        
+        float weirdOffsetY = 0.80f;
 
         switch (type)
         {
             case ClothingType.HairBack:
                 if (currentHair != null) Destroy(currentHair);
                 currentHair = prefab;
-                // Just match the doll's world position
-                currentHair.transform.position = snapPoint.transform.position;
-                currentHair.transform.rotation = snapPoint.transform.rotation;
+                currentHair.transform.SetParent(snapPoint.transform);
+                currentHair.transform.localPosition = snapPoint.transform.localPosition;
                 break;
 
             case ClothingType.Bottom:
-                if (currentBottom != null) Destroy(currentBottom);
-                currentBottom = prefab;
-                currentBottom.transform.position = snapPoint.transform.position;
-                currentBottom.transform.rotation = snapPoint.transform.rotation;
+                if (currentHair != null) Destroy(currentHair);
+                currentHair = prefab;
+                currentHair.transform.SetParent(snapPoint.transform);
+                currentHair.transform.localPosition = snapPoint.transform.localPosition;
                 break;
 
                 // Add other cases as needed
