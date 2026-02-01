@@ -8,10 +8,11 @@ using static UnityEditor.Progress;
 public class DressingUpManager : MonoBehaviour
 {
 
-    [SerializeField] private Transform hairSlot;
+    [SerializeField] private Transform snapPoint;
     private GameObject instanceOutfitPiece;
 
     private GameObject currentHair;
+    private GameObject currentBottom;
 
     private Stack<GameObject> undoStack = new Stack<GameObject>();
     public SpriteRenderer dollSprite;
@@ -150,18 +151,19 @@ public class DressingUpManager : MonoBehaviour
 
         switch (type)
         {
-            case ClothingType.Hair:
+            case ClothingType.HairBack:
                 if (currentHair != null) Destroy(currentHair);
-
-                // Don't instantiate - just reparent and position the existing item
                 currentHair = prefab;
-                currentHair.transform.SetParent(hairSlot);
-                currentHair.transform.localPosition = Vector3.zero;
-                currentHair.transform.localRotation = Quaternion.identity;
+                // Just match the doll's world position
+                currentHair.transform.position = snapPoint.transform.position;
+                currentHair.transform.rotation = snapPoint.transform.rotation;
                 break;
 
-            case ClothingType.Dress:
-                // Similar logic for dress
+            case ClothingType.Bottom:
+                if (currentBottom != null) Destroy(currentBottom);
+                currentBottom = prefab;
+                currentBottom.transform.position = snapPoint.transform.position;
+                currentBottom.transform.rotation = snapPoint.transform.rotation;
                 break;
 
                 // Add other cases as needed
@@ -170,8 +172,12 @@ public class DressingUpManager : MonoBehaviour
 }
 public enum ClothingType
 {
-    Hair,
-    Dress,
-    Shoes,
-    Accessories
+    HairBack,
+    HairFront,
+    Top,
+    Bottom,
+    Makeup,
+    Socks,
+    Shoes
+   
 }
