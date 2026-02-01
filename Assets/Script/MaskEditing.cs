@@ -5,7 +5,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
-using static UnityEditor.PlayerSettings;
 
 public class MaskEditing : MonoBehaviour
 {

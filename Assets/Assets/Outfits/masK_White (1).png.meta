@@ -1,16 +1,13 @@
 fileFormatVersion: 2
-guid: 5505a464e9c0b5b4c8a46efb7c50df07
+guid: 0d9143d678ab73c4b8b87eb6c0c7bbf7
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1976466997711170374
-    second: Socks_0
+      213: 4158641191996118345
+    second: masK_White (1)_0
   - first:
-      213: -135480847317891785
-    second: Socks_1
-  - first:
-      213: -4456364586627623690
-    second: Socks_2
+      213: 5682499605328882637
+    second: masK_White (1)_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,67 +116,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Socks_0
+      name: masK_White (1)_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2597
-        height: 3731
+        x: 633
+        y: 248
+        width: 1388
+        height: 1286
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ab49423ccbd2294e0800000000000000
-      internalID: -1976466997711170374
+      spriteID: 9455c35712676b930800000000000000
+      internalID: 4158641191996118345
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Socks_1
+      name: masK_White (1)_1
       rect:
         serializedVersion: 2
-        x: 1934
-        y: 2061
-        width: 7
+        x: 945
+        y: 224
+        width: 22
         height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7358fbd13ecae1ef0800000000000000
-      internalID: -135480847317891785
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Socks_2
-      rect:
-        serializedVersion: 2
-        x: 1947
-        y: 1916
-        width: 7
-        height: 6
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6f41e60f400d722c0800000000000000
-      internalID: -4456364586627623690
+      spriteID: dcbeceba84b4cde40800000000000000
+      internalID: 5682499605328882637
       vertices: []
       indices: 
       edges: []
@@ -188,7 +163,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: dc5dae779d0937f4f906c3cb21267288
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Socks_0: -1976466997711170374
-      Socks_1: -135480847317891785
-      Socks_2: -4456364586627623690
+      masK_White (1)_0: 4158641191996118345
+      masK_White (1)_1: 5682499605328882637
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

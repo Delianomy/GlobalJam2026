@@ -1,16 +1,31 @@
 fileFormatVersion: 2
-guid: 5505a464e9c0b5b4c8a46efb7c50df07
+guid: 9a25c01cfc57f8e4ea88ec13df7f7edd
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1976466997711170374
-    second: Socks_0
+      213: 4265234648949861045
+    second: makeup_0
   - first:
-      213: -135480847317891785
-    second: Socks_1
+      213: 3011515983533257151
+    second: makeup_1
   - first:
-      213: -4456364586627623690
-    second: Socks_2
+      213: 1916885540580775150
+    second: makeup_2
+  - first:
+      213: -978629565887575147
+    second: makeup_3
+  - first:
+      213: 6703959811908370785
+    second: makeup_4
+  - first:
+      213: 3385433762142055357
+    second: makeup_5
+  - first:
+      213: 836200007595647593
+    second: makeup_6
+  - first:
+      213: -541170395853688379
+    second: makeup_7
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -119,29 +134,139 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Socks_0
+      name: makeup_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 2597
-        height: 3731
+        x: 1243
+        y: 3323
+        width: 32
+        height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ab49423ccbd2294e0800000000000000
-      internalID: -1976466997711170374
+      spriteID: 5ba2856a058213b30800000000000000
+      internalID: 4265234648949861045
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Socks_1
+      name: makeup_1
+      rect:
+        serializedVersion: 2
+        x: 1313
+        y: 3338
+        width: 27
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb139e1d4dd0bc920800000000000000
+      internalID: 3011515983533257151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_2
+      rect:
+        serializedVersion: 2
+        x: 1377
+        y: 3325
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee456693e352a9a10800000000000000
+      internalID: 1916885540580775150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_3
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 2860
+        width: 341
+        height: 455
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59b839648953b62f0800000000000000
+      internalID: -978629565887575147
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_4
+      rect:
+        serializedVersion: 2
+        x: 1231
+        y: 3313
+        width: 16
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1610b490eef390d50800000000000000
+      internalID: 6703959811908370785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_5
+      rect:
+        serializedVersion: 2
+        x: 1555
+        y: 2842
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbb6713e11a7bfe20800000000000000
+      internalID: 3385433762142055357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: makeup_6
       rect:
         serializedVersion: 2
         x: 1934
@@ -149,21 +274,21 @@ TextureImporter:
         width: 7
         height: 8
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 7358fbd13ecae1ef0800000000000000
-      internalID: -135480847317891785
+      spriteID: 962eaedf977ca9b00800000000000000
+      internalID: 836200007595647593
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Socks_2
+      name: makeup_7
       rect:
         serializedVersion: 2
         x: 1947
@@ -171,15 +296,15 @@ TextureImporter:
         width: 7
         height: 6
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6f41e60f400d722c0800000000000000
-      internalID: -4456364586627623690
+      spriteID: 5c1fe2864606d78f0800000000000000
+      internalID: -541170395853688379
       vertices: []
       indices: 
       edges: []
@@ -188,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: dc5dae779d0937f4f906c3cb21267288
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -198,9 +323,14 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Socks_0: -1976466997711170374
-      Socks_1: -135480847317891785
-      Socks_2: -4456364586627623690
+      makeup_0: 4265234648949861045
+      makeup_1: 3011515983533257151
+      makeup_2: 1916885540580775150
+      makeup_3: -978629565887575147
+      makeup_4: 6703959811908370785
+      makeup_5: 3385433762142055357
+      makeup_6: 836200007595647593
+      makeup_7: -541170395853688379
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

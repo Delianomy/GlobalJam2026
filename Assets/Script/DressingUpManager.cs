@@ -1,11 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using static UnityEditor.Progress;
 using static UnityEngine.Rendering.DebugUI;
 using System.IO;
 
@@ -16,9 +14,13 @@ public class DressingUpManager : MonoBehaviour
 
     private GameObject instanceOutfitPiece;
 
-    private GameObject currentHair;
+    private GameObject currentHairFront;
+    private GameObject currentHairBack;
     private GameObject currentBottom;
     private GameObject currentTop;
+    private GameObject currentSocks;
+    private GameObject currentMakeup;
+    private GameObject currentShoes;
 
     private Stack<GameObject> undoStack = new Stack<GameObject>();
     public SpriteRenderer dollSprite;
@@ -148,11 +150,12 @@ public class DressingUpManager : MonoBehaviour
         GameObject camObj = new GameObject("TempCamera");
         Camera cam = camObj.AddComponent<Camera>();
         cam.orthographic = true;
+
         cam.clearFlags = CameraClearFlags.Color;
         cam.backgroundColor = new Color(0, 0, 0, 0);
         cam.transform.position = new Vector3(bounds.center.x, bounds.center.y, -10);
         cam.orthographicSize = bounds.size.y / 2f;
-
+        cam.orthographicSize *= 1.3f;
         RenderTexture rt = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
         cam.targetTexture = rt;
         cam.Render();
@@ -257,7 +260,10 @@ public class DressingUpManager : MonoBehaviour
         switch (type)
         {
             case ClothingType.HairBack:
-                EquipToSlot(ref currentHair, prefab, snapPoint.transform);
+                EquipToSlot(ref currentHairBack, prefab, snapPoint.transform);
+                break;
+            case ClothingType.HairFront:
+                EquipToSlot(ref currentHairFront, prefab, snapPoint.transform);
                 break;
 
             case ClothingType.Bottom:
@@ -267,6 +273,16 @@ public class DressingUpManager : MonoBehaviour
             case ClothingType.Top:
                 EquipToSlot(ref currentTop, prefab, snapPoint.transform);
                 break;
+            case ClothingType.Socks:
+                EquipToSlot(ref currentSocks, prefab, snapPoint.transform);
+                break;
+            case ClothingType.Makeup:
+                EquipToSlot(ref currentMakeup, prefab, snapPoint.transform);
+                break;
+            case ClothingType.Shoes:
+                EquipToSlot(ref currentShoes, prefab, snapPoint.transform);
+                break;
+
 
 
                 // Add other cases as needed
@@ -280,95 +296,6 @@ public class DressingUpManager : MonoBehaviour
         currentItem.transform.SetParent(slot);
         currentItem.transform.localPosition = slot.localPosition;
     }
-
-    //private IEnumerator CaptureCurrentDress( ) {
-
-    //    // 1. Load the capture scene additively
-    //    AsyncOperation loadOp = SceneManager.LoadSceneAsync("CaptureScene", LoadSceneMode.Additive);
-    //    while (!loadOp.isDone)
-    //        yield return null;
-
-
-    //    // 2. Get the loaded scene
-    //    Scene captureScene = SceneManager.GetSceneByName("CaptureScene");
-    //    if (!captureScene.IsValid())
-    //    {
-    //        Debug.LogError("CaptureScene not loaded properly!");
-    //        yield break;
-    //    }
-
-    //    // 3. Find the CaptureManager in the loaded scene
-    //    CaptureImage captureManager = null;
-    //    foreach (GameObject root in captureScene.GetRootGameObjects())
-    //    {
-    //        captureManager = root.GetComponentInChildren<CaptureImage>();
-    //        if (captureManager != null) break;
-    //    }
-
-    //    if (captureManager == null)
-    //    {
-    //        Debug.LogError("CaptureManager not found in CaptureScene!");
-    //        yield break;
-    //    }
-
-    //    // 4. Pass object to capture
-    //    captureManager.CaptureObject(snapPoint);
-
-    //    // 5. Wait until capture is done
-    //    yield return new WaitUntil(() => captureManager.IsCaptureDone);
-
-    //    // 6. Unload capture scene
-    //    AsyncOperation unloadOp = SceneManager.UnloadSceneAsync(captureScene);
-    //    while (!unloadOp.isDone)
-    //        yield return null;
-
-    //    Debug.Log("Capture complete and scene unloaded!");
-
-    //}
-
-
-
-
-
-    //    IEnumerator LoadCaptureSceneAndCapture(GameObject roots)
-    //    {
-    //        if (loadedCaptureScene)
-    //        {
-    //            yield return null;
-    //        }
-    //        AsyncOperation load = SceneManager.LoadSceneAsync("CaptureScene", LoadSceneMode.Additive);
-
-    //        // Wait until scene is fully loaded
-    //        while (!load.isDone)
-    //            yield return null;
-
-    //        Scene captureScene = SceneManager.GetSceneByName("CaptureScene");
-
-    //        if (!captureScene.isLoaded)
-    //        {
-    //            Debug.LogError("CaptureScene not loaded!");
-    //            yield break;
-    //        }
-
-    //        // Now it's safe to search
-    //        CaptureImage capture = FindObjectOfType<CaptureImage>();
-
-    //        if (capture == null)
-    //        {
-    //            Debug.LogError("CaptureImage NOT found in CaptureScene!");
-    //            yield break;
-    //        }
-
-    //        Debug.Log("i did it :D");
-
-    //        loadedCaptureScene = true;
-
-    //        capture.Capture(roots);
-    //    }
-
-
-    //}
-
 
 }
 

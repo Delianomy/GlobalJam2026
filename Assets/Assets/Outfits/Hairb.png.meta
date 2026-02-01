@@ -1,10 +1,16 @@
 fileFormatVersion: 2
-guid: b74908646b804e644afcad5bb1b95bfd
+guid: 9a88d8f7bf00db548a5439f5fb095bf6
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 62885517097242852
-    second: CapturedMask_0
+      213: 3325658764112816664
+    second: Hairb_0
+  - first:
+      213: -4913628872377874365
+    second: Hairb_1
+  - first:
+      213: 6525951788025116182
+    second: Hairb_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +52,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -113,13 +119,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CapturedMask_0
+      name: Hairb_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 618
-        height: 821
+        x: 1070
+        y: 2988
+        width: 656
+        height: 557
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +134,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4e0191c6b0a6fd000800000000000000
-      internalID: 62885517097242852
+      spriteID: 81aeb1f960d172e20800000000000000
+      internalID: 3325658764112816664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hairb_1
+      rect:
+        serializedVersion: 2
+        x: 1934
+        y: 2061
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34840d7f2984fcbb0800000000000000
+      internalID: -4913628872377874365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Hairb_2
+      rect:
+        serializedVersion: 2
+        x: 1947
+        y: 1916
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 616ff824396d09a50800000000000000
+      internalID: 6525951788025116182
       vertices: []
       indices: 
       edges: []
@@ -138,7 +188,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +198,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CapturedMask_0: 62885517097242852
+      Hairb_0: 3325658764112816664
+      Hairb_1: -4913628872377874365
+      Hairb_2: 6525951788025116182
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
