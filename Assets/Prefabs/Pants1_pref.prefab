@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4552746919792090847}
   - component: {fileID: 1960540490737304862}
   - component: {fileID: 1519466707953667696}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pants1_pref
   m_TagString: Untagged
   m_Icon: {fileID: 0}

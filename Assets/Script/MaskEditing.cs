@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 
@@ -128,7 +129,8 @@ public class MaskEditing : MonoBehaviour
         if (hit.collider.gameObject == save)
         {
             MaskSave maskSave = save.GetComponent<MaskSave>();
-            maskSave.SaveRuntimeTexture();
+            maskSave.SaveRuntimeTexture("MaskTexture");
+            SceneManager.LoadScene("Showroom");
             return;
         }
 

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1796873909518611137}
   - component: {fileID: 6544549466336855999}
   - component: {fileID: 5568806677429539705}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Pants2_pref
   m_TagString: Untagged
   m_Icon: {fileID: 0}

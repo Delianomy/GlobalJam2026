@@ -59,9 +59,10 @@ public class MaskSave : MonoBehaviour
         renderCamera.orthographic = true;
         renderCamera.orthographicSize = bounds.size.y / 2;
         renderCamera.transform.position = new Vector3(bounds.center.x, bounds.center.y, -10);
+
         renderCamera.clearFlags = CameraClearFlags.SolidColor;
         renderCamera.backgroundColor = Color.clear;
-
+        renderCamera.cullingMask = LayerMask.GetMask("ImageCapture");
         // Render
         renderCamera.Render();
 

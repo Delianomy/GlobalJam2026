@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5431805406083988495}
   - component: {fileID: 6300380699977053789}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PikiStickerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}

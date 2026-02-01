@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6369927675523126656}
   - component: {fileID: 1977127608037286527}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: HeartSticker_Pref
   m_TagString: Untagged
   m_Icon: {fileID: 0}

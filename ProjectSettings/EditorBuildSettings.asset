@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MaskEditingScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/DressingScene.unity
+    guid: fe89e9d9ced9b9d4d9757a647ec312f4
+  - enabled: 1
+    path: Assets/Scenes/Showroom.unity
+    guid: db0b915fee3950742a8999ca8a8cbfd1
+  - enabled: 1
+    path: Assets/Scenes/CaptureScene.unity
+    guid: 27c8afb5a7a10b54c882b58b7a5b8f1e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4367976824812371695}
   - component: {fileID: 2957587559004864055}
   - component: {fileID: 5410139476175503803}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Socks1_Pref
   m_TagString: Untagged
   m_Icon: {fileID: 0}
