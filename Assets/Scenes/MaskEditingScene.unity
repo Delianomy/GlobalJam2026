@@ -582,7 +582,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -8152459101451434042, guid: d38a1b5f80d74ed4e8383d8365546323, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1142,7 +1142,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 6.82, y: 5.67}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 1
 --- !u!212 &1050916528
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1473,7 +1473,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: -887227640535717009, guid: ab36c3780bea107498f0b62b944e661e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1665,6 +1665,10 @@ PrefabInstance:
     - target: {fileID: 169284208170892657, guid: 7c09353e96247db40a220bb6f1203237, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6441274990389337558, guid: 7c09353e96247db40a220bb6f1203237, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8359068156289908508, guid: 7c09353e96247db40a220bb6f1203237, type: 3}
       propertyPath: m_Name

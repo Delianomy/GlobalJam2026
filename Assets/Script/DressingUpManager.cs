@@ -148,29 +148,31 @@ public class DressingUpManager : MonoBehaviour
     {
 
         Debug.Log(type);
-        
-        float weirdOffsetY = 0.80f;
 
         switch (type)
         {
             case ClothingType.HairBack:
-                if (currentHair != null) Destroy(currentHair);
-                currentHair = prefab;
-                currentHair.transform.SetParent(snapPoint.transform);
-                currentHair.transform.localPosition = snapPoint.transform.localPosition;
+                EquipToSlot(ref currentHair, prefab, snapPoint.transform);
                 break;
 
             case ClothingType.Bottom:
-                if (currentHair != null) Destroy(currentHair);
-                currentHair = prefab;
-                currentHair.transform.SetParent(snapPoint.transform);
-                currentHair.transform.localPosition = snapPoint.transform.localPosition;
+                EquipToSlot(ref currentBottom, prefab, snapPoint.transform);
                 break;
 
                 // Add other cases as needed
         }
     }
+
+    void EquipToSlot(ref GameObject currentItem, GameObject newItem, Transform slot)
+    {
+        if (currentItem != null) Destroy(currentItem);
+        currentItem = newItem;
+        currentItem.transform.SetParent(slot);
+        currentItem.transform.localPosition = slot.localPosition;
+    }
 }
+
+
 public enum ClothingType
 {
     HairBack,
