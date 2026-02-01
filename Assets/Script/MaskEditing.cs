@@ -232,6 +232,11 @@ public class MaskEditing : MonoBehaviour
         byte[] bytes = texture.EncodeToPNG();
         System.IO.File.WriteAllBytes(Application.dataPath + "/CapturedMask.png", bytes);
 
+        // **THIS IS THE KEY FIX**
+#if UNITY_EDITOR
+        UnityEditor.AssetDatabase.Refresh();
+#endif
+
         // Cleanup
         RenderTexture.active = null;
         cam.targetTexture = null;

@@ -18,6 +18,7 @@ public class DressingUpManager : MonoBehaviour
 
     private GameObject currentHair;
     private GameObject currentBottom;
+    private GameObject currentTop;
 
     private Stack<GameObject> undoStack = new Stack<GameObject>();
     public SpriteRenderer dollSprite;
@@ -131,13 +132,11 @@ public class DressingUpManager : MonoBehaviour
 
     public void CaptureSprites()
     {
-        int pixelsPerUnit = 100; // Match your sprites import settings
+        int pixelsPerUnit = 100;
         Bounds bounds = CalculateBounds(objectToCapture.GetComponentsInChildren<SpriteRenderer>());
-
         int width = Mathf.CeilToInt(bounds.size.x * pixelsPerUnit);
         int height = Mathf.CeilToInt(bounds.size.y * pixelsPerUnit);
 
-        // Disable everything in the capture scene
         foreach (GameObject root in SceneManager.GetSceneByName("DressingScene").GetRootGameObjects())
         {
             root.SetActive(false);
@@ -145,7 +144,6 @@ public class DressingUpManager : MonoBehaviour
 
         GameObject captureInstance = Instantiate(objectToCapture);
         captureInstance.SetActive(true);
-
 
         GameObject camObj = new GameObject("TempCamera");
         Camera cam = camObj.AddComponent<Camera>();
@@ -157,7 +155,6 @@ public class DressingUpManager : MonoBehaviour
 
         RenderTexture rt = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
         cam.targetTexture = rt;
-
         cam.Render();
 
         RenderTexture.active = rt;
@@ -167,7 +164,15 @@ public class DressingUpManager : MonoBehaviour
 
         // Save
         byte[] bytes = texture.EncodeToPNG();
-        System.IO.File.WriteAllBytes(Application.dataPath + "/CapturedDress.png", bytes);
+        string path = Application.dataPath + "/CapturedSprite.png";
+        System.IO.File.WriteAllBytes(path, bytes);
+
+        // **THIS IS THE KEY FIX**
+#if UNITY_EDITOR
+        UnityEditor.AssetDatabase.Refresh();
+#endif
+
+        Debug.Log("Saved to: " + path);
 
         // Cleanup
         RenderTexture.active = null;
@@ -258,6 +263,11 @@ public class DressingUpManager : MonoBehaviour
             case ClothingType.Bottom:
                 EquipToSlot(ref currentBottom, prefab, snapPoint.transform);
                 break;
+
+            case ClothingType.Top:
+                EquipToSlot(ref currentTop, prefab, snapPoint.transform);
+                break;
+
 
                 // Add other cases as needed
         }
