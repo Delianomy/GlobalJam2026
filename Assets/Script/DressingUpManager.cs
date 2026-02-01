@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.PackageManager;
@@ -30,8 +30,8 @@ public class DressingUpManager : MonoBehaviour
 
 
     public GameObject objectToCapture;
-    public int width = 512;
-    public int height = 512;
+    public int width = 2000;
+    public int height = 2000;
 
     void Update()
     {
@@ -131,56 +131,50 @@ public class DressingUpManager : MonoBehaviour
 
     public void CaptureSprites()
     {
-        // Get all SpriteRenderers in children
-        SpriteRenderer[] renderers = objectToCapture.GetComponentsInChildren<SpriteRenderer>();
+        int pixelsPerUnit = 100; // Match your sprites import settings
+        Bounds bounds = CalculateBounds(objectToCapture.GetComponentsInChildren<SpriteRenderer>());
 
-        // Calculate bounds
-        Bounds bounds = CalculateBounds(renderers);
+        int width = Mathf.CeilToInt(bounds.size.x * pixelsPerUnit);
+        int height = Mathf.CeilToInt(bounds.size.y * pixelsPerUnit);
 
-        // Create a temporary camera
-        GameObject camObj = new GameObject("TempCamera");
-        Camera cam = camObj.AddComponent<Camera>();
-        cam.orthographic = true;
-        cam.clearFlags = CameraClearFlags.Color;
-        cam.backgroundColor = new Color(0, 0, 0, 0); // Transparent
-
-        // Position camera
-        cam.transform.position = new Vector3(bounds.center.x, bounds.center.y, -10);
-        cam.orthographicSize = Mathf.Max(bounds.extents.x, bounds.extents.y);
-
-        foreach (GameObject root in SceneManager.GetSceneByName("Dressingscene").GetRootGameObjects())
+        // Disable everything in the capture scene
+        foreach (GameObject root in SceneManager.GetSceneByName("DressingScene").GetRootGameObjects())
         {
             root.SetActive(false);
         }
 
-        // Instantiate your capture object
         GameObject captureInstance = Instantiate(objectToCapture);
         captureInstance.SetActive(true);
 
-        // Create RenderTexture with transparency
+
+        GameObject camObj = new GameObject("TempCamera");
+        Camera cam = camObj.AddComponent<Camera>();
+        cam.orthographic = true;
+        cam.clearFlags = CameraClearFlags.Color;
+        cam.backgroundColor = new Color(0, 0, 0, 0);
+        cam.transform.position = new Vector3(bounds.center.x, bounds.center.y, -10);
+        cam.orthographicSize = bounds.size.y / 2f;
+
         RenderTexture rt = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
         cam.targetTexture = rt;
 
-        // Render
         cam.Render();
 
-        // Read pixels
         RenderTexture.active = rt;
         Texture2D texture = new Texture2D(width, height, TextureFormat.ARGB32, false);
         texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
         texture.Apply();
 
-        // Save as PNG (supports transparency)
+        // Save
         byte[] bytes = texture.EncodeToPNG();
-        System.IO.File.WriteAllBytes(Application.dataPath + "/CapturedSprite.png", bytes);
+        System.IO.File.WriteAllBytes(Application.dataPath + "/CapturedDress.png", bytes);
 
         // Cleanup
         RenderTexture.active = null;
         cam.targetTexture = null;
         DestroyImmediate(rt);
         DestroyImmediate(camObj);
-
-        Debug.Log("Sprite saved to: " + Application.dataPath + "/CapturedSprite.png");
+        Destroy(captureInstance);
     }
 
 

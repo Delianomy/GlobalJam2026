@@ -974,6 +974,9 @@ MonoBehaviour:
   maxUndoSteps: 3
   parentMask: {fileID: 2012050069}
   maskWhite: {fileID: 2012050071}
+  objectToCapture: {fileID: 2012050069}
+  width: 512
+  height: 512
   rotateRight: {fileID: 1369052667}
   rotateLeft: {fileID: 2099075611}
   mirror: {fileID: 508032111}

@@ -21,7 +21,7 @@ public class ShowManager : MonoBehaviour
         }
 
         // Load the mask texture
-        Texture2D maskTexture = LoadTextureFromFile("MaskTexture.png");
+        Texture2D maskTexture = LoadTextureFromFile("MaskSpriteCaptured.png");
         if (maskTexture != null)
         {
             ApplyTextureToSprite(maskSpriteRenderer, maskTexture);

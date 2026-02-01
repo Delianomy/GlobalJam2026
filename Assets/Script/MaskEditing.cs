@@ -22,6 +22,11 @@ public class MaskEditing : MonoBehaviour
     public SpriteRenderer maskWhite;
 
 
+    public GameObject objectToCapture;
+    public int width = 512;
+    public int height = 512;
+
+
     //UI elements
     public GameObject rotateRight;
     public GameObject rotateLeft;
@@ -128,8 +133,9 @@ public class MaskEditing : MonoBehaviour
 
         if (hit.collider.gameObject == save)
         {
-            MaskSave maskSave = save.GetComponent<MaskSave>();
-            maskSave.SaveRuntimeTexture("MaskTexture");
+            //MaskSave maskSave = save.GetComponent<MaskSave>();
+            //maskSave.SaveRuntimeTexture("MaskTexture");
+            CaptureSprites();
             SceneManager.LoadScene("Showroom");
             return;
         }
@@ -184,5 +190,64 @@ public class MaskEditing : MonoBehaviour
         undoStack.Peek().GetComponent<SpriteRenderer>().flipY = !undoStack.Peek().GetComponent<SpriteRenderer>().flipY;
     }
 
+
+
+    public void CaptureSprites()
+    {
+        int pixelsPerUnit = 100; // Match your sprites import settings
+        Bounds bounds = CalculateBounds(objectToCapture.GetComponentsInChildren<SpriteRenderer>());
+
+        int width = Mathf.CeilToInt(bounds.size.x * pixelsPerUnit);
+        int height = Mathf.CeilToInt(bounds.size.y * pixelsPerUnit);
+
+        // Disable everything in the capture scene
+        foreach (GameObject root in SceneManager.GetSceneByName("MaskEditingScene").GetRootGameObjects())
+        {
+            root.SetActive(false);
+        }
+
+
+        GameObject captureInstance = Instantiate(objectToCapture);
+        captureInstance.SetActive(true);
+
+        GameObject camObj = new GameObject("TempCamera");
+        Camera cam = camObj.AddComponent<Camera>();
+        cam.orthographic = true;
+        cam.clearFlags = CameraClearFlags.Color;
+        cam.backgroundColor = new Color(0, 0, 0, 0);
+        cam.transform.position = new Vector3(bounds.center.x, bounds.center.y, -10);
+        cam.orthographicSize = bounds.size.y / 2f;
+
+        RenderTexture rt = new RenderTexture(width, height, 24, RenderTextureFormat.ARGB32);
+        cam.targetTexture = rt;
+
+        cam.Render();
+
+        RenderTexture.active = rt;
+        Texture2D texture = new Texture2D(width, height, TextureFormat.ARGB32, false);
+        texture.ReadPixels(new Rect(0, 0, width, height), 0, 0);
+        texture.Apply();
+
+        // Save
+        byte[] bytes = texture.EncodeToPNG();
+        System.IO.File.WriteAllBytes(Application.dataPath + "/CapturedMask.png", bytes);
+
+        // Cleanup
+        RenderTexture.active = null;
+        cam.targetTexture = null;
+        DestroyImmediate(rt);
+        DestroyImmediate(camObj);
+        Destroy(captureInstance);
+    }
+
+    private Bounds CalculateBounds(SpriteRenderer[] renderers)
+    {
+        Bounds bounds = renderers[0].bounds;
+        foreach (var renderer in renderers)
+        {
+            bounds.Encapsulate(renderer.bounds);
+        }
+        return bounds;
+    }
 }
 
